@@ -14,7 +14,10 @@ export default createStore({
     matrix: null,
     mosaic: null,
     imagesTeaser: null,
-    kacheln:null
+    kacheln:null,
+    navigation:null,
+    image_array:null,
+    main_navigation:null
   },
   mutations: {
     setToken(state, token) {
@@ -49,6 +52,12 @@ export default createStore({
     },
     setKacheln(state, kacheln) {
       state.kacheln = kacheln
+    },
+    setMainNav(state, main_navigation) {
+      state.main_navigation = main_navigation
+    },
+    setImageArray(state, image_array) {
+      state.image_array = image_array
     },
   },
   actions: {
@@ -87,6 +96,7 @@ export default createStore({
 
 
     },
+
     async getMosaic({ commit, dispatch }, id) {
 
       let url = 'http://localhost:8055/items/kacheln'
@@ -136,9 +146,23 @@ export default createStore({
 
 
     },
-    async loadPage({ commit, dispatch, state }, slug) {
-      let url = "http://localhost:8055/items/seite?filter[slug][_eq]=" + slug + "&fields=elemente.item:*.*&fields=theme_color"
+    async getImagesArray({ commit, dispatch, state }, payload){
+      let url = 'http://localhost:8055/items/'+payload.collection+'?filter[id][_eq]='+payload.id+'&fields=bilder.*'
+     
+      console.log("filter", url)
+      let res = await axios.get(url,
+        {
+          'headers': {
+            'Authorization': 'Bearer ' + this.state.token,
+          }
+        },
+      )
 
+      console.log("images",res.data.data )
+      commit("setImageArray",res.data.data)
+    },
+    async loadPage({ commit, dispatch, state }, slug) {
+      let url = "http://localhost:8055/items/seite?filter[slug_seite][titel][_eq]=" + slug + "&fields=elemente.item:hero.*&fields=elemente.item:hero.navigation.inhalte.page_navigations_id.*&fields=theme_color"
       let res = await axios.get(url,
         {
           'headers': {
@@ -149,6 +173,17 @@ export default createStore({
       commit('setPage', res.data.data)
 
 
+    },
+    async loadMainNav({ commit, dispatch, state }) {
+      let url = "http://localhost:8055/items/navigation?filter[titel][_eq]=main_nav&fields=inhalte.page_navigations_id.*"
+
+      let res = await axios.get(url,
+        {
+          'headers': {
+            'Authorization': 'Bearer ' + this.state.token,
+          }
+        })
+      commit('setMainNav', res.data.data)
     },
     async getImagesTeaser({ commit, dispatch, state }, id) {
       let url = "http://localhost:8055/items/teaser?filter[id][_eq]=" + id + "&fields=bilder.*"
@@ -163,7 +198,7 @@ export default createStore({
       commit('setImagesTeaser', res.data.data)
     },
     async getMosaicKacheln({ commit, dispatch, state }, id) {
-      let url = "http://localhost:8055/items/kacheln?filter[id][_eq]=" + id + "&fields=bestandteile.*"
+      let url = "http://localhost:8055/items/kacheln?filter[id][_eq]=" + id + "&fields=bestandteile.slug_seite.*&fields=bestandteile.*"
 
       let res = await axios.get(url,
         {
@@ -195,11 +230,17 @@ export default createStore({
     getMatrix: state => {
       return state.matrix
     },
-    getImagesTeaser(state, images) {
+    getImagesTeaser: state => {
       return state.imagesTeaser
     },
-    getKacheln(state, kacheln) {
+    getKacheln: state => {
       return state.kacheln
+    },
+    getMainNav: state => {
+      return state.main_navigation
+    },
+    getImageArray: state => {
+      return state.image_array
     },
   },
   modules: {

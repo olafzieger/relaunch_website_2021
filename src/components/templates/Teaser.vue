@@ -3,12 +3,13 @@
     <div class="OuterContainer">
       <div
         class="InnerContainerTeaser"
+        
         :style="InnerContainerStyle"
         v-if="article && images"
       >
-        <div class="hero_teaser">
+        <div class="hero_teaser" :class="article.bezeichnung">
           <div class="image_container_teaser">
-            <transition name="slide-fade">
+            <transition name="fade">
               <img
                 :src="
                   'http://localhost:8055/assets/' +
@@ -98,17 +99,16 @@ body{
   min-height: 800px;
 }
 
-.slide-fade-enter-active {
-  transition: all 2.8s ease;
+.fade-enter-active{
+  transition: opacity 1.5s;
 }
-.slide-fade-leave-active {
-  transition: all 2.8s cubic-bezier(1, 0.5, 0.8, 1);
+.fade-leave-active {
+  transition: opacity .5s;
 }
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  /*transform: translateX(10px);*/
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+
 .OuterContainer {
   position: inherit;
 }

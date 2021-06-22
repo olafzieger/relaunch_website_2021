@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="OuterContainer">
+        <div class="OuterContainer_mosaic">
             <div class="InnerContainer mosaic" v-if="article" >
                 <h2>{{article.titel}}</h2>
                 <div v-for="part,index in kacheln" :key="index" :class="classArray[index]">
                     <div class="kachelWrapper">
                         <h1> {{part.titel}}</h1>
                         <img :src="'http://localhost:8055/assets/'+ part.bild" alt="" class="kachelimage">
-                        <div class="kachel_link"><a :href="'/themen/'+part.link">{{part.link}}</a></div>
+                        <div class="kachel_link" v-if="part.slug_seite"><a :href="part.slug_seite.ziel">{{part.slug_seite.beschreibung}}</a></div>
                     </div>
                 </div>
 
@@ -51,10 +51,13 @@ export default {
     },
 }
 </script>
-<style lang="css">
+<style lang="scss">
     .mosaic{
-        width: 90%;
+        width: 70%;
         margin-bottom: 120px;
+    }
+    .OuterContainer_mosaic{
+        background: white;
     }
     .kachel1{
         position: relative;
@@ -65,6 +68,24 @@ export default {
         padding-top: 10px;
 
         float:right
+    }
+    .kachel_link{
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        color:white;
+        width:100%;
+        text-align: left;
+        padding-left: 0px;
+        padding-bottom: 30px;
+        background: rgba(0,0,0,0.3);    
+        a{
+            margin-left:20px;
+            margin-top:5px;
+            color:white;
+            font-size: 25px;
+            text-decoration: none;
+        }
     }
     .kachel2{
         position: relative;
