@@ -1,7 +1,7 @@
 <template>
     <div id="nav">
         <div class="icon">
-            <a href="/"><img src="http://localhost:8055/assets/0b50d997-af18-471d-846b-1f51fede465a" alt="" class="logo"></a>
+            <a href="/"><img src="http://localhost:8055/assets/2f575ac5-7356-4113-ba1d-f071f65a7fa2" alt="" class="logo"></a>
         </div>
         <div class="link" v-if="navigation">
             <a v-for="item,index in navigation" :key="index" :href="item.page_navigations_id.ziel">
