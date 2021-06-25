@@ -1,9 +1,16 @@
 <template>
     <div>
         <div class="OuterContainer_mosaic">
-            <div class="InnerContainer mosaic" v-if="article" >
+            <div class="InnerContainer mosaic" :class="article.kachel_template" v-if="article" >
                 <h2>{{article.titel}}</h2>
-                <div v-for="part,index in kacheln" :key="index" :class="classArray[index]">
+                <div v-if="article.filter_einschalten">
+                   <ul class="filter">
+                       <li @click="unset_filter()">All</li>
+                       <li v-for="item,index in article.kategorie_auswahl" :key="index" @click="filter_kacheln(item)">{{item}}</li>
+
+                   </ul>
+                </div>
+                <div v-for="part,index in filtered_kacheln" :key="index" :class="classArray[article.kachel_template][index]">
                     <div class="kachelWrapper">
                         <h1> {{part.titel}}</h1>
                         <img :src="'http://localhost:8055/assets/'+ part.bild" alt="" class="kachelimage">
@@ -21,24 +28,60 @@ export default {
         return {
             images:null,
             kacheln:null,
+            filtered_kacheln:null,
             customhero:{
                 backgroundImage:null
             },
-            classArray:[
-                'kachel1',
-                'kachel2',
-                'kachel2',
-                'kachel3',
-                'kachel3',
-                'kachel3',
-                'kachel2'
+            classArray:{
+                "zwei-groessen":[
+                    'kachel1',
+                    'kachel2',
+                    'kachel3',
+                    'kachel3',
+                    'kachel1',
+                    'kachel2',
+                    'kachel2'
+                ],
+                 "drei-groessen":[
+                    'kachel1',
+                    'kachel2',
+                    'kachel2',
+                    'kachel3',
+                    'kachel1',
+                    'kachel2',
+                    'kachel2'
+                ],
+                "gleich-gross":[
+                    'kachel1',
+                    'kachel1',
+                    'kachel1',
+                    'kachel3',
+                    'kachel1',
+                    'kachel2',
+                    'kachel2'
+                ]
 
-            ]
+            }
+        }
+    },
+    methods:{
+        unset_filter(){
+            this.filtered_kacheln=this.kacheln
+        },
+        filter_kacheln(item){
+            console.log("filter")
+            console.log(this.kacheln)
+            console.log(item)
+            console.log(typeof this.kacheln[0].kategorien)
+            console.log(Object.values(this.kacheln[0].kategorien).indexOf(item)  > -1)
+        
+            this.filtered_kacheln=this.kacheln.filter(el=>  Object.values(el.kategorien).indexOf(item) > -1 )
         }
     },
     async created() {
         await this.$store.dispatch("getMosaicKacheln",this.article.id)
         this.kacheln=this.$store.getters.getKacheln[0].bestandteile
+        this.filtered_kacheln=this.kacheln
         console.log("Kacheln",this.kacheln)
         
     },
@@ -52,22 +95,19 @@ export default {
 }
 </script>
 <style lang="scss">
+    .filter{
+        list-style: none;
+        display: flex;
+        li{
+            margin: 0 5px;
+        }
+    }
     .mosaic{
         width: 70%;
         margin-bottom: 120px;
     }
     .OuterContainer_mosaic{
         background: white;
-    }
-    .kachel1{
-        position: relative;
-        display: block;
-        width: 49%;
-        height: 510px;
-        margin-right: 1%;
-        padding-top: 10px;
-
-        float:right
     }
     .kachel_link{
         position: absolute;
@@ -87,24 +127,70 @@ export default {
             text-decoration: none;
         }
     }
-    .kachel2{
-        position: relative;
-        display: block;
-        width: 24.5%;
-        margin-left: .25%;
-        height: 250px;
-        padding-top: 10px;
-        float:left
+    .gleich-gross{
+        .kachel1, .kachel2, .kachel3{
+            position: relative;
+            width: 24%;
+            margin: .25%;
+            height: 15vw;
+            padding-top: 10px;
+            float: left;
+        }
+    
     }
-    .kachel3{
-        position: relative;
-        display: block;
-        width: 49%;
-        margin-left: .5%;
-        height: 250px;
-        padding-top: 10px;
-        float:left
+    .zwei-groessen{
+        .kachel1, .kachel2{
+            position: relative;
+            width: 24%;
+            margin: .25%;
+            height: 15vw;
+            padding-top: 10px;
+            float: left;
+        }
+
+
+        .kachel3{
+            position: relative;
+            width: 48%;
+            margin: .25%;
+            height: 15vw;
+            padding-top: 10px;
+            float: left;
+        }
     }
+    .drei-groessen{
+        .kachel1{
+            position: relative;
+            display: block;
+            width: 49%;
+            height: 510px;
+            margin-right: 1%;
+            padding-top: 10px;
+
+            float:right
+        }
+    
+        .kachel2{
+            position: relative;
+            display: block;
+            width: 24.5%;
+            margin-left: .25%;
+            height: 250px;
+            padding-top: 10px;
+            float:left
+        }
+        .kachel3{
+            position: relative;
+            display: block;
+            width: 49%;
+            margin-left: .5%;
+            height: 250px;
+            padding-top: 10px;
+            float:left
+        }
+
+    }
+    
     .InnerContainer{
         display:inline-block;
     }
