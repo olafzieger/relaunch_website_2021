@@ -29,6 +29,11 @@
             </div>
             <div class="content_einzel_beitrag">
                 <p v-html="article.text" class="text_einzel_beitrag"></p>
+                <div  class="link_box">
+                   <p v-html="article.link_box"></p>
+
+                   <a >{{article.link_box_link.titel}}</a>
+                </div>
             </div>
         </div>
  
@@ -84,6 +89,11 @@ export default {
 };
 </script>
 <style lang="scss">
+
+.link_box{
+  border: gold 2px solid;
+  padding: 12px
+}
 
 .OuterContainer.einzel_beitrag{
     background: linear-gradient(90deg, rgba(255,255,255,1) 50%, rgba(0,0,0,0) 50%);

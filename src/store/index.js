@@ -162,7 +162,7 @@ export default createStore({
       commit("setImageArray",res.data.data)
     },
     async loadPage({ commit, dispatch, state }, slug) {
-      let url = "http://localhost:8055/items/seite?filter[slug_seite][titel][_eq]=" + slug + "&fields=elemente.item:hero.*&fields=elemente.item:hero.navigation.inhalte.page_navigations_id.*&fields=theme_color"
+      let url = "http://localhost:8055/items/seite?filter[slug_seite][titel][_eq]=" + slug + "&fields=elemente.item:hero.*&fields=elemente.item:hero.navigation.inhalte.page_navigations_id.*&fields=theme_color&fields=elemente.item:einzel_beitrag.link_box_link.*&fields=elemente.item:einzel_beitrag.*"
       let res = await axios.get(url,
         {
           'headers': {

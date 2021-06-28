@@ -5,8 +5,8 @@
                 <h2>{{article.titel}}</h2>
                 <div v-if="article.filter_einschalten">
                    <ul class="filter">
-                       <li @click="unset_filter()">All</li>
-                       <li v-for="item,index in article.kategorie_auswahl" :key="index" @click="filter_kacheln(item)">{{item}}</li>
+                       <li @click="unset_filter()">Alle</li>
+                       <li v-for="item,index in article.kategorie_auswahl" :key="index" @click="filter_kacheln(item)">{{filterArray[item]}}</li>
 
                    </ul>
                 </div>
@@ -31,6 +31,12 @@ export default {
             filtered_kacheln:null,
             customhero:{
                 backgroundImage:null
+            },
+            filterArray:{
+                "gruenmarketing":"Grünmarketing",
+                "events":"Events",
+                "kampagnen":"Kampagnen",
+                "mediaplanung":"Mediaplanung"
             },
             classArray:{
                 "zwei-groessen":[
