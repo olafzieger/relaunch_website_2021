@@ -32,7 +32,7 @@
                 <div  class="link_box">
                    <p v-html="article.link_box"></p>
 
-                   <a >{{article.link_box_link.titel}}</a>
+                   <a :href="article.link_box_link[0].page_navigations_id.ziel">{{article.link_box_link[0].page_navigations_id.titel}}</a>
                 </div>
             </div>
         </div>
@@ -92,7 +92,11 @@ export default {
 
 .link_box{
   border: gold 2px solid;
-  padding: 12px
+  padding: 12px;
+  a{
+    color:white;
+    text-decoration:none;
+  }
 }
 
 .OuterContainer.einzel_beitrag{

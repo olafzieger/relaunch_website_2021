@@ -6,7 +6,7 @@
           <div class="content">
             <h1>{{ article.titel }}</h1>
             <h2>{{ article.untertitel }}</h2>
-            <div v-if="article.navigation">
+            <div v-if="article.navigation" class="hero_nav_wrapper">
               <span  v-for="item,index in article.navigation.inhalte" :key="index" class="hero_nav" @click="moveTo(item.page_navigations_id.internes_ziel)">
                 {{item.page_navigations_id.titel}}</span>
             </div>           
@@ -66,63 +66,5 @@ export default {
 };
 </script>
 <style lang="scss">
-.InnerContainer.hero {
-  position: relative;
-}
 
-.hero {
-  background-size: cover;
-  height: 800px;
-  width: 100%;
-  .content{
-      margin-top: 500px;
-      font-size: 35px;
-      margin-left:230px;
-      text-align:left;
-      text-shadow: 2px 2px #000;
-      h2,h1{
-        margin:0px;
-        padding:0px;
-      }
-  }
-}
-
-
-.heroImage {
-  position: absolute;
-  left: 0px;
-  top: 0;
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-}
-.heroVideo {
-  position: absolute;
-  left: 0px;
-  top: 0;
-  width: 100%;
-  height: 800px;
-  object-fit: cover;
-}
-
-.hero_nav{
-  font-size:20px;
-  padding-right:10px;
-  padding-left:10px;
-  margin-top:0px;
-  border-right: 2px solid white;
-  &:last-child{
-      border-right: 0px solid white;
-  }
-  &:hover{
-    color:cadetblue;
-    font-weight: bold;
-    text-shadow: none;
-  }
-}
-
-.InnerContainer {
-  display: inline-block;
-  width: 100%;
-}
 </style>

@@ -14,6 +14,13 @@
             </a> 
        
         </div>
+        <div class="burgermenu" v-if="navigation">
+            <div class="menu__btn-open" id="burgerMenuClose" @click="closeNav">
+                <span class="bar1"></span>
+                <span class="bar2"></span>
+                <span class="bar3"></span>
+            </div>
+        </div>
         
     </div>
 </template>
@@ -34,35 +41,5 @@ export default {
 }
 </script>
 <style lang="scss">
-#nav{
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    z-index: 5;
-    background-color: white;
-    width: 100%;
-}
-.link{
-    display: flex;
-    margin-top:15px;
-    margin-right: 30px;
-    a{
-        color:black;
-        text-decoration: none; 
-        margin-left: 10px;
-        margin-right: 5px;
-    }
-    a:hover{
-        color: cadetblue;
-        font-weight: bold;
-    }
-}
 
-.logo{
-    height: 40px;
-    margin-left: 120px;
-}
 </style>

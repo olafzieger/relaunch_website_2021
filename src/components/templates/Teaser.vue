@@ -129,7 +129,7 @@ body{
 }
 .content {
   position: absolute;
-  width: 100%;
+  //width: 100%;
   top: 0%;
   z-index: 2;
   color: white;
