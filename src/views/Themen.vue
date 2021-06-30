@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div style="padding-top:40px;"></div>
 
     <!--<component v-bind:is="currentTabComponent" class="tab"></component>-->
     <div v-for="(part, index) in page_elements" :key="index">
@@ -18,6 +17,7 @@ import Mosaic from "@/components/templates/Mosaic.vue";
 import Teaser from "@/components/templates/Teaser.vue";
 import InfoBox from "@/components/templates/InfoBox.vue";
 import EinzelBeitrag from "@/components/templates/EinzelBeitrag.vue";
+import LogoShowcase from "@/components/templates/LogoShowcase.vue";
 
 import gsap from "gsap";
 export default {
@@ -26,7 +26,8 @@ export default {
     Mosaic,
     Teaser,
     InfoBox,
-    EinzelBeitrag
+    EinzelBeitrag,
+    LogoShowcase
   },
   data() {
     return {

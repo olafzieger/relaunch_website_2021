@@ -17,7 +17,8 @@ export default createStore({
     kacheln:null,
     navigation:null,
     image_array:null,
-    main_navigation:null
+    main_navigation:null,
+    footer:null
   },
   mutations: {
     setToken(state, token) {
@@ -59,6 +60,9 @@ export default createStore({
     setImageArray(state, image_array) {
       state.image_array = image_array
     },
+    setFooter(state, footer) {
+      state.footer = footer
+    },
   },
   actions: {
     async serverStart({ commit, dispatch }) {
@@ -70,8 +74,6 @@ export default createStore({
           mode: "json"
         }).then(resp => {
           const token = resp.data.data.access_token
-          console.log("starting auth")
-          console.log(token)
           commit('setToken', resp.data.data.access_token)
           commit('setRefreshToken', resp.data.data.refresh_token)
           resolve(resp)
@@ -91,7 +93,6 @@ export default createStore({
           }
         })
       let result = res.data.data
-      console.log("Heros", result)
       commit('setHero', result)
 
 
@@ -110,12 +111,11 @@ export default createStore({
         }
       )
       let result = res.data.data
-      console.log("Mosaic", result)
 
+      
       let filter = JSON.stringify(result[0].bestandteile)
-      console.log("filter", filter)
+
       url = 'http://localhost:8055/items/kachel?filter={ "id" : { "_in" : ' + filter + '}}'
-      console.log("filter", url)
       res = await axios.get(url,
         {
           'headers': {
@@ -124,7 +124,6 @@ export default createStore({
         },
       )
       result = res.data.data
-      console.log("Mosaic", result)
       commit('setMosaic', result)
 
 
@@ -141,7 +140,6 @@ export default createStore({
           }
         })
       let result = res.data.data
-      console.log("Teaser", result)
       commit('setTeaser', result)
 
 
@@ -149,7 +147,6 @@ export default createStore({
     async getImagesArray({ commit, dispatch, state }, payload){
       let url = 'http://localhost:8055/items/'+payload.collection+'?filter[id][_eq]='+payload.id+'&fields=bilder.*'
      
-      console.log("filter", url)
       let res = await axios.get(url,
         {
           'headers': {
@@ -158,11 +155,16 @@ export default createStore({
         },
       )
 
-      console.log("images",res.data.data )
       commit("setImageArray",res.data.data)
     },
     async loadPage({ commit, dispatch, state }, slug) {
-      let url = "http://localhost:8055/items/seite?filter[slug_seite][titel][_eq]=" + slug + "&fields=elemente.item:hero.*&fields=elemente.item:hero.navigation.inhalte.page_navigations_id.*&fields=theme_color&fields=elemente.item:einzel_beitrag.link_box_link.page_navigations_id.*&fields=elemente.item:einzel_beitrag.*"
+      let url = "http://localhost:8055/items/seite?filter[slug_seite][titel][_eq]=" + 
+                slug + 
+                "&fields=elemente.item:hero.*&"+
+                "fields=elemente.item:hero.navigation.inhalte.page_navigations_id.*"+
+                "&fields=theme_color&fields=elemente.item:einzel_beitrag.link_box_link.*"
+                +"&fields=elemente.item:logo_showcase.logos.*"
+                +"&fields=elemente.item:logo_showcase.template_name"
       let res = await axios.get(url,
         {
           'headers': {
@@ -185,6 +187,13 @@ export default createStore({
         })
       commit('setMainNav', res.data.data)
     },
+    async loadMainFooter({ commit, dispatch, state }) {
+      let url = "http://localhost:8055/items/footer?fields=*.*&fields=links.page_navigations_id.*"
+
+      let res = await axios.get(url)
+      console.log("loading Footer",res.data.data[0]);
+      commit('setFooter', res.data.data[0])
+    },
     async getImagesTeaser({ commit, dispatch, state }, id) {
       let url = "http://localhost:8055/items/teaser?filter[id][_eq]=" + id + "&fields=bilder.*"
 
@@ -194,7 +203,6 @@ export default createStore({
             'Authorization': 'Bearer ' + this.state.token,
           }
         })
-      console.log("Bilder setImagesTeaser", res.data.data)
       commit('setImagesTeaser', res.data.data)
     },
     async getMosaicKacheln({ commit, dispatch, state }, id) {
@@ -206,7 +214,6 @@ export default createStore({
             'Authorization': 'Bearer ' + this.state.token,
           }
         })
-      console.log("Bilder setKacheln", res.data.data)
       commit('setKacheln', res.data.data)
     }
 
@@ -241,6 +248,9 @@ export default createStore({
     },
     getImageArray: state => {
       return state.image_array
+    },
+    getFooter: state => {
+      return state.footer
     },
   },
   modules: {

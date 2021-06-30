@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="padding-top:40px;"></div>
+
 
     <!--<component v-bind:is="currentTabComponent" class="tab"></component>-->
     <div v-for="(part, index) in page_elements" :key="index">
@@ -18,6 +18,7 @@ import Mosaic from "@/components/templates/Mosaic.vue";
 import Teaser from "@/components/templates/Teaser.vue";
 import InfoBox from "@/components/templates/InfoBox.vue";
 import EinzelBeitrag from "@/components/templates/EinzelBeitrag.vue";
+import LogoShowcase from "@/components/templates/LogoShowcase.vue";
 
 import gsap from "gsap";
 export default {
@@ -26,7 +27,7 @@ export default {
     Mosaic,
     Teaser,
     InfoBox,
-    EinzelBeitrag
+    EinzelBeitrag,LogoShowcase,
   },
   data() {
     return {
@@ -37,7 +38,7 @@ export default {
     await this.$store.dispatch("serverStart");
     await this.$store.dispatch("loadPage", 'home');
     let res = this.$store.getters.getPage;
-     console.log("page result", res);
+    console.log("änderungen übernommen")
     if(res[0]){
       this.page_elements = res[0].elemente;    
       gsap.to("body", { backgroundColor: res[0].theme_color });
