@@ -37,7 +37,7 @@
     left: 0px;
     top: 0;
     width: 100%;
-    height: 500px;
+    height: 800px;
     object-fit: cover;
   }
   .heroVideo {
@@ -52,6 +52,7 @@
   .hero_nav{
     display: block;
     font-size:20px;
+     
 
     @media (min-width:768px) {
         display: inline;
