@@ -1,0 +1,130 @@
+.link_box{
+    border: gold 2px solid;
+    padding: 12px;
+    a{
+      color:white;
+      text-decoration:none;
+    }
+  }
+
+  .OuterContainer.einzel_beitrag{
+     
+    @media (min-width:768px) {
+      background: linear-gradient(90deg, rgba(255,255,255,1) 50%, rgba(0,0,0,0) 50%);
+        }
+}
+.text_beitrag{
+    text-align: left;
+    width: 90%;
+    margin: auto;
+    padding-bottom: 20px;
+    @media (min-width:768px) {
+        width: 50%;
+    }
+}
+
+.image_container_einzel_beitrag{
+    min-height: 320px;
+    @media (min-width:768px) {
+       width: 50%;
+       position: relative;
+       img{
+           width: 80%;
+           margin-left: 10%;
+           height: 400px;
+       }
+     }
+     
+
+     
+ }
+ .beitrag_part{
+    display: flex;
+    flex-direction: row;
+    @media (min-width:768px) {
+        width: 100%;
+        flex-direction: row;
+    }
+ }
+ .beitrag_part_one{
+    min-height: 320px;
+    z-index: 4;
+    color: white;
+    width: 90%;
+    margin: auto;
+    text-align: left;
+    @media (min-width:768px) {
+        width: 100%;
+        min-height: 20px;
+        color: #000;
+        margin-left: 5%;
+    }
+ }
+
+ .text_beitrag_content{
+     width: 90%;
+     margin: auto;
+ }
+
+ .einzel_beitrag_content{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    @media (min-width:768px) {
+      width: 80%;
+      flex-direction: column;
+    }
+}
+ .image_einzel_beitrag{
+    
+    width:100%;
+    height:300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    @media (min-width:768px) {
+
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+  
+  /*
+
+  .InnerContainerTeaser.einzel_beitrag{
+      padding-top: 20px;
+      padding-bottom: 100px;
+  }
+  
+  .fade-enter-active{
+    transition: opacity 1.5s;
+  }
+  .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+  .titel_beitrag_content{
+      color: black;
+      text-align: right;
+      margin-right: 20px;
+  }
+
+  
+  
+  .content_einzel_beitrag{
+      width: 30%;
+      color: white;
+      text-align: left;
+      margin-left: 5%;
+      margin-right: auto;
+  }
+  
+  
+
+ */

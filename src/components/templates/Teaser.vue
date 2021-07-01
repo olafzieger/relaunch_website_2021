@@ -20,9 +20,9 @@
                 class="image"
               />
             </transition>
-            <h2 class="titel_teaser">{{ article.titel }}</h2>
+            <h2 class="titel_teaser content_width">{{ article.titel }}</h2>
           </div>
-          <div class="hero_content">
+          <div class="hero_content content_width">
             <p v-html="article.text"></p>
             <a :href="'/themen/'+article.link" class="link_teaser">{{article.link}}</a>
           </div>
@@ -69,76 +69,5 @@ export default {
 };
 </script>
 <style lang="scss">
-body{
-    width:100%;
-    margin:0;
-}
-.link_teaser{
-    float:right;
-    padding: 10px;
-    font-size: 20px;
-    color: white;
-    text-decoration: none;
-    border: 1px solid white;
-}
 
-.titel_teaser {
-  z-index: 3;
-  font-size: 60px;
-  position: absolute;
-  top: 350px;
-  left: 20%;
-  color: white;
-}
-
-.hero_teaser {
-  display: flex;
-  flex-direction: column;
-  background-size: cover;
-  width: 100%;
-  min-height: 800px;
-}
-
-.fade-enter-active{
-  transition: opacity 1.5s;
-}
-.fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-
-.OuterContainer {
-  position: inherit;
-}
-.InnerContainerTeaser {
-  position: relative;
-}
-.image {
-  position: absolute;
-  left: 0px;
-  top: 0;
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-}
-.image_container_teaser {
-  margin-bottom: 520px;
-  font-size: 14px;
-}
-.content {
-  position: absolute;
-  //width: 100%;
-  top: 0%;
-  z-index: 2;
-  color: white;
-}
-
-.hero_content {
-  color: white;
-  width: 60%;
-  margin: auto;
-  text-align: left;
-}
 </style>

@@ -25,20 +25,6 @@ export default {
 </script>
 
 <style lang="scss">
-    .OuterContainer_info_box{
-        background: linear-gradient(90deg, rgba(255,255,255,1) 50%, rgba(0,0,0,0) 50%);
-    }
-    .info_box{
-        margin-left: auto;
-        margin-right: auto;
-        width: 30%;
-
-    }
-    .content_info_box{
-        width: 100%;        
-        padding: 30px;
-        margin:100px 0px 100px 0px;
-        background-color: #FFC800;
-    }
+  
 
 </style>

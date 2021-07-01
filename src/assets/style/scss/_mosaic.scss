@@ -1,0 +1,161 @@
+.filter{
+    list-style: none;
+    text-align: left;
+    margin-left: 0px;
+    padding-left: 0px;
+    columns: 2;
+    font-size: 20px;
+    @media (min-width:768px) {
+        display: flex;
+        font-size: 15px;
+    }
+    li{
+        margin: 0 5px;
+    }
+}
+.mosaic{
+    width: 70%;
+    margin-bottom: 120px;
+}
+.OuterContainer_mosaic{
+    background: white;
+}
+.kachel_link{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    color:white;
+    width:100%;
+    text-align: left;
+    padding-left: 0px;
+    padding-bottom: 30px;
+    background: rgba(0,0,0,0.3);    
+    a{
+        margin-left:20px;
+        margin-top:5px;
+        color:white;
+        font-size: 25px;
+        text-decoration: none;
+    }
+}
+.gleich-gross{
+    .kachel1, .kachel2, .kachel3{
+        position: relative;
+        width: 24%;
+        margin: .25%;
+        height: 15vw;
+        padding-top: 10px;
+        float: left;
+    }
+
+}
+.zwei-groessen{
+    .kachel1, .kachel2{
+        position: relative;
+        width: 100%;
+        margin: .25%;
+        height: 300px;
+        padding-top: 10px;
+        float: left;
+    }
+
+
+    .kachel3{
+        position: relative;
+        width: 100%;
+        margin: .25%;
+        height: 200px;
+        padding-top: 10px;
+        float: left;
+    }
+    @media (min-width:768px) {
+        .kachel1, .kachel2{
+            position: relative;
+            width: 48%;
+            margin: .25%;
+            height: 25vw;
+            padding-top: 10px;
+            float: left;
+        }
+    
+    
+        .kachel3{
+            position: relative;
+            width: 98%;
+            margin: .25%;
+            height: 25vw;
+            padding-top: 10px;
+            float: left;
+        }
+    }
+    @media (min-width:1024px) {
+        .kachel1, .kachel2{
+            width: 24%;
+            margin: .25%;
+            height: 15vw;
+            padding-top: 10px;
+            float: left;
+        }
+    
+    
+        .kachel3{
+            width: 48%;
+            margin: .25%;
+            height: 15vw;
+            padding-top: 10px;
+            float: left;
+        }
+    }
+}
+.drei-groessen{
+    .kachel1{
+        position: relative;
+        display: block;
+        width: 49%;
+        height: 510px;
+        margin-right: 1%;
+        padding-top: 10px;
+
+        float:right
+    }
+
+    .kachel2{
+        position: relative;
+        display: block;
+        width: 24.5%;
+        margin-left: .25%;
+        height: 250px;
+        padding-top: 10px;
+        float:left
+    }
+    .kachel3{
+        position: relative;
+        display: block;
+        width: 49%;
+        margin-left: .5%;
+        height: 250px;
+        padding-top: 10px;
+        float:left
+    }
+
+}
+
+.InnerContainer{
+    display:inline-block;
+}
+
+.kachelimage{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    left: 0;
+    top: 0;
+     border-radius: 5px;
+}
+.kachelWrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+   
+}

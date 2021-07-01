@@ -16,8 +16,12 @@ body{
   font-size: 60px;
   position: absolute;
   top: 350px;
-  left: 20%;
+  left:5%;
+  text-align: left;
   color: white;
+  @media (min-width:768px) {
+    left: 20%;
+  }
 }
 
 .hero_teaser {
@@ -64,9 +68,16 @@ body{
   color: white;
 }
 
-.hero_content {
-  color: white;
-  width: 60%;
-  margin: auto;
-  text-align: left;
+.content_width {
+  width: 90%;
+  @media (min-width:768px) {
+    width: 60%;
+  }
 }
+.hero_content {
+    color: white;
+    margin: auto;
+    text-align: left;
+
+  }
+  
