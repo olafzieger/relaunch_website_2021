@@ -1,6 +1,8 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 
+const base_url="http://109.239.58.167:8057"
+
 export default createStore({
   state: {
     token: null,
@@ -68,7 +70,7 @@ export default createStore({
     async serverStart({ commit, dispatch }) {
 
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8055/auth/login', {
+        axios.post(base_url+'/auth/login', {
           email: "schwarz@runze-casper.de",
           password: "admin123",
           mode: "json"
@@ -76,6 +78,7 @@ export default createStore({
           const token = resp.data.data.access_token
           commit('setToken', resp.data.data.access_token)
           commit('setRefreshToken', resp.data.data.refresh_token)
+          console.log("login",resp.data.data.access_token)
           resolve(resp)
         }).catch(err => {
         })
@@ -83,9 +86,9 @@ export default createStore({
     },
     async getHeros({ commit, dispatch }) {
 
-      let url = 'http://localhost:8055/items/hero'
+      let url = base_url+'/items/hero'
       //console.log(url)
-      //console.log(this.state.token)
+      console.log(this.state.token)
       let res = await axios.get(url,
         {
           'headers': {
@@ -100,7 +103,7 @@ export default createStore({
 
     async getMosaic({ commit, dispatch }, id) {
 
-      let url = 'http://localhost:8055/items/kacheln'
+      let url = base_url+'/items/kacheln'
       //console.log(url)
       //console.log(this.state.token)
       let res = await axios.get(url,
@@ -115,7 +118,7 @@ export default createStore({
       
       let filter = JSON.stringify(result[0].bestandteile)
 
-      url = 'http://localhost:8055/items/kachel?filter={ "id" : { "_in" : ' + filter + '}}'
+      url = base_url+'/items/kachel?filter={ "id" : { "_in" : ' + filter + '}}'
       res = await axios.get(url,
         {
           'headers': {
@@ -130,7 +133,7 @@ export default createStore({
     },
     async getTeaser({ commit, dispatch }) {
 
-      let url = 'http://localhost:8055/items/teaser'
+      let url = base_url+'/items/teaser'
       //console.log(url)
       //console.log(this.state.token)
       let res = await axios.get(url,
@@ -145,7 +148,7 @@ export default createStore({
 
     },
     async getImagesArray({ commit, dispatch, state }, payload){
-      let url = 'http://localhost:8055/items/'+payload.collection+'?filter[id][_eq]='+payload.id+'&fields=bilder.*'
+      let url = base_url+'/items/'+payload.collection+'?filter[id][_eq]='+payload.id+'&fields=bilder.*'
      
       let res = await axios.get(url,
         {
@@ -158,10 +161,10 @@ export default createStore({
       commit("setImageArray",res.data.data)
     },
     async loadPage({ commit, dispatch, state }, slug) {
-      let url = "http://localhost:8055/items/seite?filter[slug_seite][titel][_eq]=" + 
+      let url = base_url+"/items/seite?filter[seite_slug][titel][_eq]=" + 
                 slug + 
-                "&fields=elemente.item:hero.*&"+
-                "fields=elemente.item:hero.navigation.inhalte.page_navigations_id.*"+
+                "&fields=elemente.item:hero.*&"
+                "fields=elemente.item:hero.navigation.inhalte.page_navigations_id.*"
                 "&fields=theme_color&fields=elemente.item:einzel_beitrag.link_box_link.*"
                 +"&fields=elemente.item:logo_showcase.logos.*"
                 +"&fields=elemente.item:logo_showcase.template_name"
@@ -177,7 +180,7 @@ export default createStore({
 
     },
     async loadMainNav({ commit, dispatch, state }) {
-      let url = "http://localhost:8055/items/navigation?filter[titel][_eq]=main_nav&fields=inhalte.page_navigations_id.*"
+      let url = base_url+"/items/navigation?filter[titel][_eq]=main_nav&fields=inhalte.page_navigations_id.*"
 
       let res = await axios.get(url,
         {
@@ -188,14 +191,14 @@ export default createStore({
       commit('setMainNav', res.data.data)
     },
     async loadMainFooter({ commit, dispatch, state }) {
-      let url = "http://localhost:8055/items/footer?fields=*.*&fields=links.page_navigations_id.*"
+      let url = base_url+"/items/footer?fields=*.*&fields=links.page_navigations_id.*"
 
       let res = await axios.get(url)
       console.log("loading Footer",res.data.data[0]);
       commit('setFooter', res.data.data[0])
     },
     async getImagesTeaser({ commit, dispatch, state }, id) {
-      let url = "http://localhost:8055/items/teaser?filter[id][_eq]=" + id + "&fields=bilder.*"
+      let url = base_url+"/items/teaser?filter[id][_eq]=" + id + "&fields=bilder.*"
 
       let res = await axios.get(url,
         {
@@ -206,7 +209,7 @@ export default createStore({
       commit('setImagesTeaser', res.data.data)
     },
     async getMosaicKacheln({ commit, dispatch, state }, id) {
-      let url = "http://localhost:8055/items/kacheln?filter[id][_eq]=" + id + "&fields=bestandteile.slug_seite.*&fields=bestandteile.*"
+      let url = base_url+"/items/kacheln?filter[id][_eq]=" + id + "&fields=bestandteile.slug_seite.*&fields=bestandteile.*"
 
       let res = await axios.get(url,
         {

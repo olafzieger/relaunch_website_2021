@@ -1,8 +1,10 @@
 <template>
   <navigation></navigation>
-  <transition name="scale-slide">
-      <router-view  :key="$route.fullPath" />
-  </transition>
+    <router-view v-slot="{ Component }">
+      <transition>
+        <component :is="Component" />
+      </transition>
+    </router-view>
   <footer-test></footer-test>
 </template>
 <script>
