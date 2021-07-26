@@ -163,11 +163,13 @@ export default createStore({
     async loadPage({ commit, dispatch, state }, slug) {
       let url = base_url+"/items/seite?filter[seite_slug][titel][_eq]=" + 
                 slug + 
-                "&fields=elemente.item:hero.*&"
-                "fields=elemente.item:hero.navigation.inhalte.page_navigations_id.*"
-                "&fields=theme_color&fields=elemente.item:einzel_beitrag.link_box_link.*"
-                +"&fields=elemente.item:logo_showcase.logos.*"
-                +"&fields=elemente.item:logo_showcase.template_name"
+                "&fields=elemente.item:hero.*&"+
+                "fields=elemente.item:hero.navigation.inhalte.page_navigations_id.*"+
+                "&fields=theme_color&fields=elemente.item:einzel_beitrag.link_box_link.*"+
+                "&fields=elemente.item:logo_showcase.logos.*"+
+                "&fields=elemente.item:logo_showcase.template_name"+
+                "&fields=elemente.item:teaser.*"+
+                "&fields=elemente.item:teaser.navigation.*"
       let res = await axios.get(url,
         {
           'headers': {

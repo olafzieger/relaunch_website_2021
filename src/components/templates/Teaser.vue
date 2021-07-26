@@ -12,7 +12,7 @@
             <transition name="fade">
               <img
                 :src="
-                  'http://localhost:8055/assets/' +
+                  asset_url+
                   this.images[image_index].directus_files_id
                 "
                 alt=""
@@ -24,7 +24,7 @@
           </div>
           <div class="hero_content content_width">
             <p v-html="article.text"></p>
-            <a :href="'/themen/'+article.link" class="link_teaser">{{article.link}}</a>
+            <a :href="article.navigation.ziel" class="link_teaser">{{article.link}}</a>
           </div>
         </div>
       </div>
@@ -39,6 +39,7 @@ export default {
     return {
       image_index: 0,
       images: null,
+      asset_url:null,
       InnerContainerStyle: {
         backgroundColor: "none",
       },
@@ -50,6 +51,7 @@ export default {
   async created() {
     await this.$store.dispatch("getImagesTeaser", this.article.id);
     this.images = this.$store.getters.getImagesTeaser[0].bilder;
+    this.asset_url=process.env.VUE_APP_ASSET_URL
   },
   methods: {
     iterateImages() {

@@ -1,19 +1,27 @@
 <template>
   <div class="OuterContainer_showcase">
     <div class="showcase">
-        <img v-for="logo,index in article.logos" :key="index" :src="'http://localhost:8055/assets/'+logo.directus_files_id" alt="" class="logo_showcase">
+        <img v-for="logo,index in article.logos" :key="index" :src="asset_url+logo.directus_files_id" alt="" class="logo_showcase">
     </div>
     
   </div>
 </template>
 <script>
 export default {
+  computed:{
+    asset_url(){
+      return process.env.VUE_APP_ASSET_URL
+    }    
+  },
   created(){
       console.log("test logo showcase")
   },
   props: {
     article: Object,
   },
+  mounted(){
+    console.log("logo article", this.article)
+  }
 };
 </script>
 <style lang="scss">

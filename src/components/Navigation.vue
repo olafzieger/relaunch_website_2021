@@ -4,13 +4,12 @@
             <router-link to="/"><img src="http://localhost:8055/assets/0b50d997-af18-471d-846b-1f51fede465a" alt="" class="logo"></router-link>
         </div>
         <div class="link" v-if="navigation">
-            <router-link to="/">home</router-link>
             <router-link v-for="item,index in navigation" :key="index" :to="item.page_navigations_id.ziel">
-                <span v-if="!item.page_navigations_id.icon" >
+                <span v-if="!item.page_navigations_id.icon" class="text_nav">
                     {{item.page_navigations_id.titel}} 
                 </span>
-                <span v-else>
-                    <img :src="'http://localhost:8055/assets/'+item.page_navigations_id.icon" />
+                <span v-else class="image_nav">
+                    <img :src="'http://109.239.58.167:8057/assets/'+item.page_navigations_id.icon" />
                 </span>
             </router-link> 
        
@@ -143,5 +142,14 @@ export default {
             text-decoration: none;
             color: #FFF;
         }
+    }
+    .image_nav{
+        img{
+            width: 40px;
+        }
+    }
+    .text_nav{
+        display: block;
+        padding-top: 5px;
     }
 </style>

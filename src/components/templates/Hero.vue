@@ -14,7 +14,7 @@
           </div>
           <div v-if="this.article.bild">
             <img
-              :src="'http://localhost:8055/assets/' + this.article.bild"
+              :src="asset_url + this.article.bild"
               alt=""
               class="heroImage"
             />
@@ -22,7 +22,7 @@
           <div v-else-if="this.article.video">
             <video class="heroVideo" autoplay muted loop>
               <source
-                :src="'http://localhost:8055/assets/' + this.article.video"
+                :src="asset_url + this.article.video"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
@@ -42,6 +42,7 @@ export default {
     return {
       customhero: {
         backgroundImage: null,
+        asset_url:null
       },
     };
   },
@@ -62,6 +63,9 @@ export default {
         "http://localhost:8055/assets/" + this.article.bild;
       console.log(this.customhero);
     }
+    console.log("hero process url",process.env.VUE_APP_BASE_URL)
+    this.asset_url=process.env.VUE_APP_ASSET_URL
+
   },
 };
 </script>

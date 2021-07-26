@@ -12,9 +12,11 @@
                 </div>
                 <div v-for="part,index in filtered_kacheln" :key="index" :class="classArray[article.kachel_template][index]">
                     <div class="kachelWrapper">
-                        <h1> {{part.titel}}</h1>
-                        <img :src="'http://localhost:8055/assets/'+ part.bild" alt="" class="kachelimage">
-                        <div class="kachel_link" v-if="part.slug_seite"><a :href="part.slug_seite.ziel">{{part.slug_seite.beschreibung}}</a></div>
+                        <img :src="asset_url+ part.bild" alt="" class="kachelimage">
+                        <div class="kachel_content">
+                            <h2> {{part.titel}}</h2>
+                            <div class="kachel_link" v-if="part.slug_seite"><a :href="part.slug_seite.ziel">{{part.slug_seite.beschreibung}}</a></div>
+                        </div>
                     </div>
                 </div>
 
@@ -68,6 +70,11 @@ export default {
                 ]
 
             }
+        }
+    },
+    computed:{
+        asset_url(){
+            return process.env.VUE_APP_ASSET_URL
         }
     },
     methods:{
