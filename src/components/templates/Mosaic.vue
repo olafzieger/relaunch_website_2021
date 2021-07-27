@@ -51,9 +51,9 @@ export default {
                     'kachel2'
                 ],
                  "drei-groessen":[
+                    'kachel2',
+                    'kachel2',
                     'kachel1',
-                    'kachel2',
-                    'kachel2',
                     'kachel3',
                     'kachel1',
                     'kachel2',

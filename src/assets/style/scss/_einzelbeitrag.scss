@@ -72,10 +72,14 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    padding-bottom: 90px;
     @media (min-width:768px) {
       width: 80%;
       flex-direction: column;
     }
+}
+.einzel_beitrag_content:first-child{
+  padding-top: 80px;
 }
  .image_einzel_beitrag{
     

@@ -1,7 +1,7 @@
 <template>
     <div id="nav" class="nav_bar">
         <div class="icon">
-            <router-link to="/"><img src="http://localhost:8055/assets/0b50d997-af18-471d-846b-1f51fede465a" alt="" class="logo"></router-link>
+            <router-link to="/"><img src="http://109.239.58.167:8057/assets/e3b62c20-e903-4fca-be28-26e06c04d43d" alt="" class="logo"></router-link>
         </div>
         <div class="link" v-if="navigation">
             <router-link v-for="item,index in navigation" :key="index" :to="item.page_navigations_id.ziel">

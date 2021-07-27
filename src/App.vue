@@ -1,7 +1,19 @@
 <template>
   <navigation></navigation>
+    <div class="transitionClass">
+      <img src="http://109.239.58.167:8057/assets/3f5e8ded-8216-42f4-a923-d2ac6bf92e1f" alt="" class="transitionLogo">
+    </div>
     <router-view v-slot="{ Component }">
-      <transition>
+      <transition 
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter"
+        @enter-cancelled="enterCancelled"
+        @before-leave="beforeLeave"
+        @leave="leave"
+        @after-leave="afterLeave"
+        @leave-cancelled="leaveCancelled"
+        :css="false">
         <component :is="Component" />
       </transition>
     </router-view>
@@ -10,8 +22,9 @@
 <script>
 import Navigation from '@/components/Navigation.vue'
 import FooterTest from '@/components/FooterTest.vue'
-
+import transition from '@/mixins/transition.js'
 export default {
+  mixins:[transition],
   created(){
     console.log("App",this.$router.currentRoute._value.fullPath)
   },
@@ -60,5 +73,20 @@ export default {
 
 .scale-slide-leave-to {
   transform: scale(0.8);
+}
+
+
+.transitionClass{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  background-color: #7C7C7C;
+  opacity: 1;
+}
+
+.transitionLogo{
+  position: absolute;
+  top: 40%
 }
 </style>

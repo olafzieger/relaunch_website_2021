@@ -20,7 +20,7 @@
                       <img
                           v-if="images"
                           :src="
-                          'http://localhost:8055/assets/' +
+                          asset_url +
                           this.images[image_index].directus_files_id
                           "
                           alt=""
@@ -33,10 +33,10 @@
               <div class="text_beitrag">
                   <div class="text_beitrag_content">
                     <p v-html="article.text" class=""></p>
-                    <div  class="link_box">
+                    <div  class="link_box" v-if="article.link_box_link">
                       <p v-html="article.link_box"></p>
 
-                      <a :href="article.link_box_link[0].page_navigations_id.ziel">{{article.link_box_link[0].page_navigations_id.titel}}</a>
+                      <a :href="article.link_box_link.ziel">{{article.link_box_link.titel}}</a>
                     </div>
                   </div>
 
@@ -62,6 +62,11 @@ export default {
       },
       images:null
     };
+  },
+  computed:{
+    asset_url(){
+      return process.env.VUE_APP_ASSET_URL
+    }
   },
   props: {
     article: Object,

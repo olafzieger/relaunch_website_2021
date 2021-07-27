@@ -24,7 +24,16 @@
           </div>
           <div class="hero_content content_width">
             <p v-html="article.text"></p>
-            <a :href="article.navigation.ziel" class="link_teaser">{{article.link}}</a>
+            
+
+            <a :href="article.navigation.ziel" class="link_teaser">
+              {{article.link}}
+              <div class="arrow_wrapper">
+                <div class="arrow"></div>
+                <div class="arrow"></div>
+              </div>  
+            </a>
+            
           </div>
         </div>
       </div>
@@ -71,5 +80,44 @@ export default {
 };
 </script>
 <style lang="scss">
+  .arrow {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border: 3px solid;
+    border-color: white transparent transparent white;
+    transform: rotate(135deg);
+  }
 
+  .arrow_wrapper{
+    display: flex;
+    margin-left: 15px;
+    flex-direction: row;
+    margin-top: 2px;
+    margin-right: 15px;
+  }
+
+  .link_teaser{
+    &:hover{
+       .arrow{
+           -webkit-animation: slide 1s ease-in-out infinite; 
+          animation: slide 1s ease-in-out infinite;
+       }
+    }
+  }
+
+  @-webkit-keyframes slide {
+      0% { opacity:0; transform: translateX(0px) rotate(135deg); }	
+      40% { opacity:1; transform: translateX(9px) rotate(135deg); }	
+      80% { opacity:1; transform: translateX(30px) rotate(135deg); }	
+      100% { opacity:0; transform: translateX(50px) rotate(135deg); }	
+  }
+  @keyframes slide {
+      0% { opacity:0; transform: translateX(0px) rotate(135deg); }	
+      20% { opacity:.8; transform: translateX(9px) rotate(135deg); }	
+      50% { opacity:1; transform: translateX(18px) rotate(135deg); }	
+      70% { opacity:.7; transform: translateX(9px) rotate(135deg); }		
+      100% { opacity:0; transform: translateX(0px) rotate(135deg); }			
+	
+  }
 </style>

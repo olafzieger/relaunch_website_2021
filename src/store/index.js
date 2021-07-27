@@ -166,6 +166,7 @@ export default createStore({
                 "&fields=elemente.item:hero.*&"+
                 "fields=elemente.item:hero.navigation.inhalte.page_navigations_id.*"+
                 "&fields=theme_color&fields=elemente.item:einzel_beitrag.link_box_link.*"+
+                "&fields=theme_color&fields=elemente.item:einzel_beitrag.*"+
                 "&fields=elemente.item:logo_showcase.logos.*"+
                 "&fields=elemente.item:logo_showcase.template_name"+
                 "&fields=elemente.item:teaser.*"+
