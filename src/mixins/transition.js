@@ -18,10 +18,10 @@ export default{
                 backgroundColor:"#696869",
             })
             tl.to('.transitionClass',{
-                zIndex:-1,
+                zIndex:-10,
                 opacity:0,
-                duration:.1,
-                backgroundColor:"#7C7C7C",
+                duration:1,
+                backgroundColor:"white",
             })
           },
           // the done callback is optional when
