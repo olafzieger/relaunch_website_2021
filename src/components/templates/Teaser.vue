@@ -8,7 +8,11 @@
         v-if="article && images"
       >
         <div class="hero_teaser" :class="article.bezeichnung">
-          <div class="image_container_teaser">
+          <div class="image_container_teaser_wrapper">
+            <div class="image_container_teaser">
+            <div :style="ImageContainerOverlay" class="imageOverlay">
+
+            </div>
             <transition name="fade">
               <img
                 :src="
@@ -22,6 +26,9 @@
             </transition>
             <h2 class="titel_teaser content_width">{{ article.titel }}</h2>
           </div>
+
+          </div>
+          
           <div class="hero_content content_width">
             <p v-html="article.text"></p>
             
@@ -52,6 +59,9 @@ export default {
       InnerContainerStyle: {
         backgroundColor: "none",
       },
+      ImageContainerOverlay: {
+        backgroundColor: "none",
+      },
     };
   },
   props: {
@@ -76,10 +86,29 @@ export default {
     var timer = setInterval(this.iterateImages, 5000);
     console.log(this.article.teaser_color);
     this.InnerContainerStyle.backgroundColor = this.article.teaser_color;
+    this.ImageContainerOverlay.backgroundColor = this.article.teaser_color;
+
   },
 };
 </script>
 <style lang="scss">
+
+  .image_container_teaser{
+    img{
+      z-index: 1;
+    }
+  }
+  .imageOverlay{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    z-index: 2;
+  }
+
   .arrow {
     display: block;
     width: 10px;

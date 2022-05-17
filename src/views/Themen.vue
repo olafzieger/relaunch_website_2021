@@ -2,8 +2,8 @@
   <div>
 
     <!--<component v-bind:is="currentTabComponent" class="tab"></component>-->
-    <div v-for="(part, index) in page_elements" :key="index">
-      <component
+    <div v-for="(part, index) in page_elements" :key="index" >
+      <component v-if="part.item"
         v-bind:is="part.item.template_name"
         :article="part.item"
         class="tab"
