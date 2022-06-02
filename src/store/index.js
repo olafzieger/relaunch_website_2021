@@ -114,7 +114,6 @@ export default createStore({
         }
       )
       let result = res.data.data
-
       
       let filter = JSON.stringify(result[0].bestandteile)
 
@@ -212,7 +211,7 @@ export default createStore({
       commit('setImagesTeaser', res.data.data)
     },
     async getMosaicKacheln({ commit, dispatch, state }, id) {
-      let url = base_url+"/items/kacheln?filter[id][_eq]=" + id + "&fields=bestandteile.slug_seite.*&fields=bestandteile.*"
+      let url = base_url+"/items/kacheln?filter[id][_eq]=" + id + "&fields=bestandteile.slug_seite.*&fields=bestandteile.*&fields=erweiterbar"
 
       let res = await axios.get(url,
         {

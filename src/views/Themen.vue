@@ -41,7 +41,7 @@ export default {
      console.log("page result", res);
     if(res[0]){
       this.page_elements = res[0].elemente;    
-      gsap.to("body", { backgroundColor: res[0].theme_color });
+      //gsap.to("body", { backgroundColor: res[0].theme_color });
     }
     
   },

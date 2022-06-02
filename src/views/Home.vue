@@ -40,10 +40,12 @@ export default {
     let res = this.$store.getters.getPage;
     console.log("änderungen übernommen")
     if(res[0]){
-      this.page_elements = res[0].elemente;    
-      gsap.to("body", { backgroundColor: res[0].theme_color });
+      this.page_elements = res[0].elemente;
     }
     
+  },
+  mounted(){
+
   },
   computed: {
     test() {

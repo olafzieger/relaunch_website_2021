@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="OuterContainer_info_box">
+        <div class="OuterContainer_info_box" :style="boxStyle">
             <div class="InnerContainer" v-if="article">
                 <div class="info_box">
                     <div class="content_info_box">
@@ -16,7 +16,17 @@
 <script>
 export default {
     data(){
-        return{}
+        return{
+            boxStyle:{
+                backgroundColor:""
+            }
+        }
+    },
+    mounted() {
+        let res = this.$store.getters.getPage;
+        if(res[0]){
+           this.boxStyle.backgroundColor =res[0].theme_color
+        }
     },
     props:{
         article:Object
