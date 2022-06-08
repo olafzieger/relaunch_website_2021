@@ -38,7 +38,7 @@ export default {
     await this.$store.dispatch("serverStart");
     await this.$store.dispatch("loadPage", 'home');
     let res = this.$store.getters.getPage;
-    console.log("änderungen übernommen")
+    console.log("änderungen übernommen",res)
     if(res[0]){
       this.page_elements = res[0].elemente;
     }

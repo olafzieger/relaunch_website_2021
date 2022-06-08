@@ -182,7 +182,7 @@ export default createStore({
 
     },
     async loadMainNav({ commit, dispatch, state }) {
-      let url = base_url+"/items/navigation?filter[titel][_eq]=main_nav&fields=inhalte.page_navigations_id.*"
+      let url = base_url+"/items/navigation?filter[titel][_eq]=main_nav&fields=*.*"
 
       let res = await axios.get(url,
         {
@@ -211,7 +211,7 @@ export default createStore({
       commit('setImagesTeaser', res.data.data)
     },
     async getMosaicKacheln({ commit, dispatch, state }, id) {
-      let url = base_url+"/items/kacheln?filter[id][_eq]=" + id + "&fields=bestandteile.slug_seite.*&fields=bestandteile.*&fields=erweiterbar"
+      let url = base_url+"/items/kacheln?filter[id][_eq]=" + id + "&fields=bestandteile.seite.*&fields=bestandteile.*&fields=erweiterbar"
 
       let res = await axios.get(url,
         {

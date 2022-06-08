@@ -4,12 +4,12 @@
             <router-link to="/"><img src="http://109.239.58.167:8057/assets/79755f5c-30e8-4682-8923-fcb44858d0c3" alt="" class="logo"></router-link>
         </div>
         <div class="link" v-if="navigation">
-            <router-link v-for="item,index in navigation" :key="index" :to="item.page_navigations_id.ziel">
-                <span v-if="!item.page_navigations_id.icon" class="text_nav">
-                    {{item.page_navigations_id.titel}} 
+            <router-link v-for="item,index in navigation" :key="index" :to="item.ziel">
+                <span v-if="!item.icon" class="text_nav">
+                    {{item.titel}} 
                 </span>
                 <span v-else class="image_nav">
-                    <img :src="'http://109.239.58.167:8057/assets/'+item.page_navigations_id.icon" />
+                    <img :src="'http://109.239.58.167:8057/assets/'+item.icon" />
                 </span>
             </router-link> 
        
@@ -30,7 +30,7 @@
             <div class="openNavLinks">
                 <ul>
                     <li v-for="item,index in navigation" :key="index">
-                        <router-link :to="item.page_navigations_id.ziel"> {{item.page_navigations_id.titel}} </router-link>
+                        <router-link :to="item.ziel"> {{item.titel}} </router-link>
                     </li>
                 </ul>
             </div>
@@ -83,10 +83,10 @@ export default {
     },
     async created(){    
         window.addEventListener("scroll", this.navBarMod);        
-        console.log("nav",this.$router.currentRoute._value.fullPath)
         await this.$store.dispatch("serverStart");
         await this.$store.dispatch("loadMainNav")
         this.navigation=this.$store.getters.getMainNav[0].inhalte
+        console.log("navigation", this.navigation)
 
         if(this.$router.currentRoute._value.fullPath === "/"){
 

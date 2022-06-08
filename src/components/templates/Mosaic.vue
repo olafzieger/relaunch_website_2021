@@ -23,7 +23,7 @@
                         <img :src="asset_url+ part.bild" alt="" class="kachelimage">
                         <div class="kachel_content">
                             <h2> {{part.titel}}</h2>
-                            <div class="kachel_link" v-if="part.slug_seite"><a :href="part.slug_seite.ziel">{{part.slug_seite.beschreibung}}</a></div>
+                           <div class="kachel_link" v-if="part.seite"><a :href="part.seite.ziel">{{part.seite.beschreibung}}</a></div>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ export default {
             console.log("kacheln erweiterbar")
             while(this.kacheln.length) newArr.push(this.kacheln.splice(0,this.maxNumber));
         }
-        console.log("this.kacheln",newArr)
+        console.log("this.kacheln newArr",newArr)
         this.kachelnErweiterbar=newArr
         this.filtered_kacheln=newArr[0]//this.kacheln        
     },
