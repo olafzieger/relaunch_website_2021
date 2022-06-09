@@ -109,6 +109,13 @@ export default {
     z-index: 2;
   }
 
+  .hero_content{
+    p{
+      line-height: 36px;
+      font-size: 18px;
+    }
+  }
+
   .arrow {
     display: block;
     width: 10px;

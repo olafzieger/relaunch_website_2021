@@ -18,6 +18,8 @@ import Teaser from "@/components/templates/Teaser.vue";
 import InfoBox from "@/components/templates/InfoBox.vue";
 import EinzelBeitrag from "@/components/templates/EinzelBeitrag.vue";
 import LogoShowcase from "@/components/templates/LogoShowcase.vue";
+import InfoKacheln from "@/components/templates/InfoKacheln.vue";
+import InfoBilder from "@/components/templates/InfoBilder.vue";
 
 import gsap from "gsap";
 export default {
@@ -27,7 +29,9 @@ export default {
     Teaser,
     InfoBox,
     EinzelBeitrag,
-    LogoShowcase
+    LogoShowcase,
+    InfoKacheln,
+    InfoBilder
   },
   data() {
     return {

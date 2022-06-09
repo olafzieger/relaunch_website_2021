@@ -1,7 +1,7 @@
 <template>
     <div id="nav" class="nav_bar">
         <div class="icon">
-            <router-link to="/"><img src="http://109.239.58.167:8057/assets/79755f5c-30e8-4682-8923-fcb44858d0c3" alt="" class="logo"></router-link>
+            <router-link to="/"><img :src="logo" alt="" class="logo"></router-link>
         </div>
         <div class="link" v-if="navigation">
             <router-link v-for="item,index in navigation" :key="index" :to="item.ziel">
@@ -43,7 +43,7 @@
 </template>
 <script>
 import gsap from 'gsap'
-
+import logo from"@/assets/rc_logo_schwarz.png"
 export default {
     methods:{
         closeNav(){
@@ -78,10 +78,12 @@ export default {
     },
     data(){
         return {
-            navigation:null
+            navigation:null,
+            logo
         }
     },
     async created(){    
+        //http://109.239.58.167:8057/assets/79755f5c-30e8-4682-8923-fcb44858d0c3
         window.addEventListener("scroll", this.navBarMod);        
         await this.$store.dispatch("serverStart");
         await this.$store.dispatch("loadMainNav")

@@ -169,6 +169,15 @@ export default createStore({
                 "&fields=elemente.item:logo_showcase.logos.*"+
                 "&fields=elemente.item:logo_showcase.template_name"+
                 "&fields=elemente.item:teaser.*"+
+                "&fields=elemente.item:infokacheln.*"+
+                "&fields=elemente.item:infokacheln.kacheln.*"+
+                "&fields=elemente.item:infobilder.*"+
+                "&fields=elemente.item:infobilder.bilder.*"+
+                "&fields=elemente.item:kacheln.*"+
+                "&fields=elemente.item:kacheln.*.*"+
+                "&fields=elemente.item:kacheln.*.*.*"+
+
+
                 "&fields=elemente.item:teaser.navigation.*"
       let res = await axios.get(url,
         {
@@ -211,7 +220,7 @@ export default createStore({
       commit('setImagesTeaser', res.data.data)
     },
     async getMosaicKacheln({ commit, dispatch, state }, id) {
-      let url = base_url+"/items/kacheln?filter[id][_eq]=" + id + "&fields=bestandteile.seite.*&fields=bestandteile.*&fields=erweiterbar"
+      let url = base_url+"/items/kacheln?filter[id][_eq]=" + id + "&fields=bestandteile.seite.*&fields=bestandteile.*.*&fields=erweiterbar"
 
       let res = await axios.get(url,
         {

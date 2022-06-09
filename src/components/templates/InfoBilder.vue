@@ -3,16 +3,17 @@
         <div class="flexBoxInfoKacheln" :style="flexBoxInfoKacheln">
             <div class="width50">
                 <h2 class="kachelTitel">{{article.titel}}</h2>    
-                <div class="infoKacheln">
-                    <div v-for="part,index in kacheln" :key="index" :class="classArray[article.kachel_template][index]">
-                    <div class="kachelWrapper">
-                        <img :src="asset_url+ part.kachel_id.bild" alt="" class="kachelimage">
-                        <div class="kachel_content">
-                            <h2> {{part.kachel_id.titel}}</h2>
-                           <div class="kachel_link" v-if="part.seite"><a :href="part.seite.ziel">{{part.seite.beschreibung}}</a></div>
-                        </div>
-                    </div>
-                    </div>
+                <div class="infoBilder">
+                     <transition name="fade">
+              <img
+                :src="
+                  asset_url+
+                  article.bilder[image_index].directus_files_id
+                "
+                alt=""
+                :key="image_index"
+              />
+            </transition>
                 </div>
                 
             </div>
@@ -26,12 +27,13 @@
 
 <script>
 export default {
-    data(){
+     data(){
         return{
             boxStyle:{
                 backgroundColor:""
             },
             kacheln:null,
+            image_index:0,
              classArray:{
                 "zwei-groessen":[
                     'kachel1',
@@ -74,14 +76,24 @@ export default {
             return process.env.VUE_APP_ASSET_URL
         }
     },
-    mounted() {
+    methods: {
+        iterateImages() {
+            if (this.image_index < this.article.bilder.length - 1) {
+                this.image_index += 1;
+            } else {
+                this.image_index = 0;
+            }
+        },
+    },
+     mounted() {
         let res = this.$store.getters.getPage;
         if(res[0]){
            this.flexBoxInfoKacheln.backgroundColor =res[0].theme_color
         }
-        console.log("article infokacheln",this.article)
-        console.log("article.kachel_template",this.article.kachel_template)
-        if(this.article.kacheln) this.kacheln=this.article.kacheln
+        setInterval(this.iterateImages, 5000);
+        console.log("article infobilder",this.article)
+        //console.log("article.kachel_template",this.article.kachel_template)
+        //if(this.article.kacheln) this.kacheln=this.article.kacheln
 
     },
     props:{
@@ -90,66 +102,22 @@ export default {
 }
 </script>
 
+
 <style lang="scss">
-    $widthKachel1: calc(50% -1px);
-
-
-    .outerContainerInfoKacheln{
-        margin: 0px;
-        p{
-            width:70%;
-            max-width: 400px;
-            margin: 20px auto 20px 100px;
-            text-align: left;
-            color: white;
-            font-size: 18px;
-            line-height: 36px;
-        }
-        
-    }
-
-    .flexBoxInfoKacheln{
-        display: flex;
-        background: linear-gradient(90deg, rgba(255,255,255,1) 50%, rgba(0,0,0,0) 50%);
-        .kachelTitel{
-            text-align: right;
-            margin-right: 100px;
-        }
-
-    }
-
-   
-
-    .infoKacheln{
-        display: flex;
-        width: 70%;
+    .infoBilder{
+        width:60%;
         max-width: 500px;
-        margin: 20px 100px 20px auto;
-        align-items: space-between;
-        justify-content: space-between;
-        flex-wrap: wrap;
-
-    }
-
-
-    .kachel1{
-        width: 49%; 
-        width: $widthKachel1;
-        height:200px;
-        margin-bottom: 2%;
+        height:400px;
+        padding-bottom: 20px;
+        margin-right: 100px;
+        margin-left: auto;
+        position: relative;
         img{
+            top: 0;
+            left: 0;
+            position: absolute;
             width:100%;
-            height:100%;    
-            object-fit: cover;
-        }
-    }
-
-    .kachel2{
-        width:100%;
-        height:200px;
-        img{
-            width:100%;
-            height:100%;    
+            height:400px;
             object-fit: cover;
         }
     }

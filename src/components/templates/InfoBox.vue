@@ -19,7 +19,8 @@ export default {
         return{
             boxStyle:{
                 backgroundColor:""
-            }
+            },
+           
         }
     },
     mounted() {
@@ -36,5 +37,10 @@ export default {
 
 <style lang="scss">
   
-
+    .content_info_box{
+        p{
+            line-height:36px;
+            font-size:18px;
+        }
+    }
 </style>

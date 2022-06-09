@@ -6,7 +6,7 @@
             
             <div class="InnerContainer mosaic" :class="article.kachel_template" v-if="article" >
                 <h2>{{article.titel}}</h2>
-                 <div class="pagination">
+                 <div class="pagination" v-if="article.erweiterbar">
                     <div class="pagenumber">Seite: </div>
                     <div v-for="(pagination,index) in kachelnErweiterbar" :key="index" @click="setPage(index)" class="pagenumber">{{index}}</div>
                 </div>
@@ -18,11 +18,11 @@
                    </ul>
                 </div>
                
-                <div v-for="part,index in filtered_kacheln" :key="index" :class="classArray[article.kachel_template][index]">
+                <div v-for="part,index in filtered_kacheln" :key="index" :class="classArray[article.kachel_template][index%4]">
                     <div class="kachelWrapper">
-                        <img :src="asset_url+ part.bild" alt="" class="kachelimage">
+                        <img :src="asset_url+ part.kachel_id.bild" alt="" class="kachelimage">
                         <div class="kachel_content">
-                            <h2> {{part.titel}}</h2>
+                            <h2> {{part.kachel_id.titel}}</h2>
                            <div class="kachel_link" v-if="part.seite"><a :href="part.seite.ziel">{{part.seite.beschreibung}}</a></div>
                         </div>
                     </div>
@@ -101,21 +101,43 @@ export default {
         },
         filter_kacheln(item){
             //console.log(Object.values(this.kacheln[0].kategorien).indexOf(item)  > -1)
-        
-            this.filtered_kacheln=this.kacheln.filter(el=>  Object.values(el.kategorien).indexOf(item) > -1 )
+            console.log("this.kachelnCopy",this.kacheln)
+            let test=this.kacheln.filter(el=> {
+                if(el.kategorien){
+                    return Object.values(el.kategorien).indexOf(item) > -1
+                }  }
+                
+                )
+            console.log("test kacheln",test)
+            let newArr=[]
+            if(this.$store.getters.getKacheln[0].erweiterbar){
+                console.log("kacheln erweiterbar")
+                while(this.kacheln.length) newArr.push(test.splice(0,this.maxNumber));
+            }else{
+                newArr[0]=test
+            }
+            console.log("this.kacheln kachelnCopy", this.kachelnCopy)
+            this.kachelnErweiterbar=newArr
+            this.filtered_kacheln=newArr[0]
+
+
+
+            // this.filtered_kacheln
         }
     },
     async created() {
         await this.$store.dispatch("getMosaicKacheln",this.article.id)
         this.kacheln=this.$store.getters.getKacheln[0].bestandteile
         console.log("this.kacheln",this.kacheln)
-        const newArr = [];
+        let newArr = [];
 
         if(this.$store.getters.getKacheln[0].erweiterbar){
             console.log("kacheln erweiterbar")
             while(this.kacheln.length) newArr.push(this.kacheln.splice(0,this.maxNumber));
+        }else{
+            newArr[0]=this.kacheln
         }
-        console.log("this.kacheln newArr",newArr)
+        console.log("this.kacheln kachelnCopy", this.kachelnCopy)
         this.kachelnErweiterbar=newArr
         this.filtered_kacheln=newArr[0]//this.kacheln        
     },
