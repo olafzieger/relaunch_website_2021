@@ -170,7 +170,7 @@ export default createStore({
                 "&fields=elemente.item:logo_showcase.template_name"+
                 "&fields=elemente.item:teaser.*"+
                 "&fields=elemente.item:infokacheln.*"+
-                "&fields=elemente.item:infokacheln.kacheln.*"+
+                "&fields=elemente.item:infokacheln.kacheln.*.*"+
                 "&fields=elemente.item:infobilder.*"+
                 "&fields=elemente.item:infobilder.bilder.*"+
                 "&fields=elemente.item:kacheln.*"+

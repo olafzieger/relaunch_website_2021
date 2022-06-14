@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Themen from '../views/Themen.vue'
+import Test from '../views/Test.vue'
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
     path: '/bereich/:slug',
     name: 'bereich',
     component: Themen
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: Test
   }
 ]
 
