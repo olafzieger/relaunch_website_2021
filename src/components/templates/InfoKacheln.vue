@@ -9,7 +9,7 @@
                         <img :src="asset_url+ part.kachel_id.bild" alt="" class="kachelimage">
                         <div class="kachel_content">
                             <h2> {{part.kachel_id.titel}}</h2>
-                           <div class="kachel_link" v-if="part.seite"><a :href="part.seite.ziel">{{part.seite.beschreibung}}</a></div>
+                           <div class="kachel_link" v-if="part.kachel_id.seite"><a :href="part.kachel_id.seite.ziel">{{part.kachel_id.seite.beschreibung}}</a></div>
                         </div>
                     </div>
                     </div>

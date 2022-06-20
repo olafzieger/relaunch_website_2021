@@ -4,14 +4,14 @@
             <router-link to="/"><img :src="logo" alt="" class="logo"></router-link>
         </div>
         <div class="link" v-if="navigation">
-            <router-link v-for="item,index in navigation" :key="index" :to="item.ziel">
+            <a v-for="item,index in navigation" :key="index" :href="item.ziel">
                 <span v-if="!item.icon" class="text_nav">
                     {{item.titel}} 
                 </span>
                 <span v-else class="image_nav">
                     <img :src="'http://109.239.58.167:8057/assets/'+item.icon" />
                 </span>
-            </router-link> 
+            </a> 
        
         </div>
         <div class="burgermenu" v-if="navigation" @click="openNav()">

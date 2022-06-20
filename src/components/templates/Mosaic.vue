@@ -23,7 +23,7 @@
                         <img :src="asset_url+ part.kachel_id.bild" alt="" class="kachelimage">
                         <div class="kachel_content">
                             <h2> {{part.kachel_id.titel}}</h2>
-                           <div class="kachel_link" v-if="part.seite"><a :href="part.seite.ziel">{{part.seite.beschreibung}}</a></div>
+                           <div class="kachel_link" v-if="part.kachel_id.seite"><a :href="part.kachel_id.seite.ziel">{{part.kachel_id.seite.titel}}</a></div>
                         </div>
                     </div>
                 </div>
@@ -126,18 +126,19 @@ export default {
         }
     },
     async created() {
-        await this.$store.dispatch("getMosaicKacheln",this.article.id)
-        this.kacheln=this.$store.getters.getKacheln[0].bestandteile
-        console.log("this.kacheln",this.kacheln)
+        //await this.$store.dispatch("getMosaicKacheln",this.article.id)
+        //  colorTexturethis.kacheln=this.$store.getters.getKacheln[0].bestandteile
+        this.kacheln=this.article.bestandteile
+        console.log("this.kacheln",this.article)
         let newArr = [];
 
-        if(this.$store.getters.getKacheln[0].erweiterbar){
+        if(this.article.erweiterbar){
             console.log("kacheln erweiterbar")
             while(this.kacheln.length) newArr.push(this.kacheln.splice(0,this.maxNumber));
         }else{
             newArr[0]=this.kacheln
         }
-        console.log("this.kacheln kachelnCopy", this.kachelnCopy)
+        console.log("this.kacheln kachelnCopy", newArr)
         this.kachelnErweiterbar=newArr
         this.filtered_kacheln=newArr[0]//this.kacheln        
     },

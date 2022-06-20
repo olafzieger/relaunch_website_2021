@@ -160,7 +160,7 @@ export default createStore({
       commit("setImageArray",res.data.data)
     },
     async loadPage({ commit, dispatch, state }, slug) {
-      let url = base_url+"/items/seite?filter[seite_slug][titel][_eq]=" + 
+      let url = base_url+"/items/seite?filter[seite_slug][internes_ziel][_eq]=" + 
                 slug + 
                 "&fields=elemente.item:hero.*&"+
                 "fields=elemente.item:hero.navigation.inhalte.page_navigations_id.*"+
@@ -171,11 +171,14 @@ export default createStore({
                 "&fields=elemente.item:teaser.*"+
                 "&fields=elemente.item:infokacheln.*"+
                 "&fields=elemente.item:infokacheln.kacheln.*.*"+
+                "&fields=elemente.item:infokacheln.kacheln.*.seite.*"+
+
                 "&fields=elemente.item:infobilder.*"+
                 "&fields=elemente.item:infobilder.bilder.*"+
                 "&fields=elemente.item:kacheln.*"+
                 "&fields=elemente.item:kacheln.*.*"+
                 "&fields=elemente.item:kacheln.*.*.*"+
+                "&fields=elemente.item:kacheln.*.*.seite.*"+
 
 
                 "&fields=elemente.item:teaser.navigation.*"
@@ -220,7 +223,10 @@ export default createStore({
       commit('setImagesTeaser', res.data.data)
     },
     async getMosaicKacheln({ commit, dispatch, state }, id) {
-      let url = base_url+"/items/kacheln?filter[id][_eq]=" + id + "&fields=bestandteile.seite.*&fields=bestandteile.*.*&fields=erweiterbar"
+      let url = base_url+"/items/kacheln?filter[id][_eq]=" + id + 
+      "&fields=bestandteile.seite.*.*"+
+      "&fields=bestandteile.*.*"+
+      "&fields=erweiterbar"
 
       let res = await axios.get(url,
         {
