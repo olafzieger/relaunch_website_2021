@@ -104,6 +104,9 @@ export default {
             color: white;
             font-size: 18px;
             line-height: 36px;
+            @media(max-width:425px){
+                margin: 20px auto 20px auto;
+            }
         }
         
     }
@@ -114,6 +117,16 @@ export default {
         .kachelTitel{
             text-align: right;
             margin-right: 100px;
+            @media(max-width:425px){
+                padding-top: 20px;
+                text-align: center;
+                margin: auto;
+            }
+        }
+        @media(max-width:425px){
+            flex-direction: column;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 50%, rgba(0,0,0,0) 50%);
+
         }
 
     }
@@ -128,7 +141,9 @@ export default {
         align-items: space-between;
         justify-content: space-between;
         flex-wrap: wrap;
-
+        @media(max-width:425px){
+            margin: 20px auto 20px auto;
+        }
     }
 
 

@@ -21,7 +21,8 @@ export default {
       scene: null,
       renderer: null,
       mesh: null,
-      texture,font
+      texture,font,
+      title:"Messen"
     }
   },
   methods: {
@@ -95,7 +96,7 @@ export default {
 
         // Sizes
         const sizes = {
-            width: 400,
+            width: 1200,
             height: 500
         }
 
@@ -156,26 +157,32 @@ export default {
 
         console.log("font",this.font)
         var fontloader = new FontLoader();
-        const test=this.font
-        fontloader.load(test, function ( font ) {
-
-            const geometry = new TextGeometry( 'Hello three.js!', {
-                font: font,
-                size: 80,
-                height: 5,
+        const test= JSON.stringify(this.font)
+        const fontParsed=fontloader.parse(this.font)
+        console.log("fontloader",fontParsed)
+        const textGeometry = new TextGeometry(
+            this.title,
+            {
+                font: fontParsed,
+                size: 0.9,
+                height: 0.4,
                 curveSegments: 12,
                 bevelEnabled: true,
-                bevelThickness: 10,
-                bevelSize: 8,
+                bevelThickness: 0.03,
+                bevelSize: 0.02,
                 bevelOffset: 0,
                 bevelSegments: 5
-            } );
-            const textMaterial = new THREE.MeshBasicMaterial()
-            const text = new THREE.Mesh(textGeometry, textMaterial)
-            scene.add(text)
+            }
+        )
 
-        });   
-
+        const matcapTexture = textureLoader.load('src/assets/matcaps/2.png')
+        console.log("matcapTexture",matcapTexture)
+        const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
+        const text = new THREE.Mesh(textGeometry, cubeMaterial)
+        scene.add(text)
+        text.position.x=-5
+        text.rotation.x=-Math.PI*0.5
+        text.rotation.z=Math.PI*0.15
 
         const rectAreaLight = new THREE.RectAreaLight(0x64DABE, 2, 2, 2)
         scene.add(rectAreaLight)
@@ -188,7 +195,8 @@ export default {
         // Camera
         const camera = new THREE.PerspectiveCamera(85, sizes.width / sizes.height)
         camera.position.z = 3
-        camera.position.y = 1.2
+        camera.position.y = 2.5
+        camera.position.x=-2.5
         scene.add(camera)
 
 
