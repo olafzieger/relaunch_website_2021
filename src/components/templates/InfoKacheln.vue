@@ -4,7 +4,7 @@
             <div class="width50">
                 <h2 class="kachelTitel">{{article.titel}}</h2>    
                 <div class="infoKacheln">
-                    <div v-for="part,index in kacheln" :key="index" :class="classArray[article.kachel_template][index]">
+                    <div v-for="part,index in kacheln" :key="index" :class="classArray[article.kachel_template][index%2]">
                     <div class="kachelWrapper">
                         <img :src="asset_url+ part.kachel_id.bild" alt="" class="kachelimage">
                         <div class="kachel_content">
@@ -157,6 +157,7 @@ export default {
             height:100%;    
             object-fit: cover;
         }
+        
     }
 
     .kachel2{

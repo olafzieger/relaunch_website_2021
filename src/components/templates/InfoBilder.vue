@@ -120,5 +120,10 @@ export default {
             height:400px;
             object-fit: cover;
         }
+        @media(max-width:425px){
+            width:90%;
+            margin:auto;
+
+        }
     }
 </style>
